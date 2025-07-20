@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>Welcome to Client-B Page</h1>
+      <p>This is a simple example of a webpage using Socket.IO.</p>
+
+      <input id="msg-input" type="text" placeholder="type your message..." />
+      <button onclick="sendMessage()">Send message</button>
+    </div>
+
+    <script>
+      const ws = new WebSocket("ws://localhost:8082?user_id=user_b");
+      ws.onopen = () => {
+        console.log("Connected");
+      };
+
+      function sendMessage() {
+        const message = document.getElementById("msg-input").value;
+
+        ws.send(
+          JSON.stringify({
+            type: "send_message",
+            to: "user_a",
+            message: "Hello!",
+          })
+        );
+      }
+
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        console.log("Received:", data);
+      };
+    </script>
+  </body>
+</html>

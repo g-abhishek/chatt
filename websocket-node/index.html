@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>Welcome to My Webpage</h1>
+      <p>This is a simple example of a webpage using Socket.IO.</p>
+
+      <input id="msg-input" type="text" placeholder="type your message..." />
+      <button onclick="sendMessage()">Send message</button>
+    </div>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+      const socket = io("http://localhost:3000", {
+        query: {
+          user_id: "user_a",
+        },
+      });
+
+      function sendMessage() {
+        const message = document.getElementById("msg-input").value;
+
+        socket.emit("send_message", { to: "user_a", message: message });
+      }
+
+      socket.on("message", (data) => {
+        console.log("Message received: ", data);
+      });
+    </script>
+  </body>
+</html>
