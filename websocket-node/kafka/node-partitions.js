@@ -1,4 +1,3 @@
-const { Partitioners } = require("kafkajs");
 const assignedPartitions = [];
 const murmurhash = require('murmurhash')
 

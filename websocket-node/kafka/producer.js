@@ -1,4 +1,4 @@
-const { Kafka, Partitioners } = require("kafkajs");
+const { Kafka } = require("kafkajs");
 const brokers = ["localhost:9092"];
 
 const kafka = new Kafka({
@@ -6,7 +6,7 @@ const kafka = new Kafka({
   brokers,
 });
 
-const producer = kafka.producer({ createPartitioner: Partitioners.DefaultPartitioner});
+const producer = kafka.producer();
 
 const startProducer = async () => {
   producer.on(producer.events.CONNECT, (e) => {
