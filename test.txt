@@ -1,0 +1,8 @@
+cd websocket-node
+./run.local.sh
+
+cd partition-router
+./run.local.sh
+
+cd gateway
+./run.local.sh
